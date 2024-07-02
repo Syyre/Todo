@@ -4,44 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
-    <h1>Todos</h1>
-    <ul>
-      {% for todo in todos %}
-      <li>
-        <input
+    <div class="container">
+
+      <h1>Todos</h1>
+      <ul>
+        {% for todo in todos %}
+        <li>
+          <input
           type="checkbox"
           name="done"
           {%
-          if
-          todo['done']
-          %}
-          checked
-          {%endif%}
-          disabled
-          onchange="this.form.submit()"
-        />
-        <span {%if todo['done'] %} style="text-decoration:line-through" {% endif %}>{{ todo['task'] }}</span>
-        <form action="{{url_for('check', index=loop.index0)}}" method="post" style="display:inline;">
-          <button type="submit">Check</button>
-        </form>
-        <form action="{{ url_for('edit', index=loop.index0) }}" method="get" style="display:inline;">
-          <button type="submit">Edit</button>
-      </form>
-        <form action="{{ url_for('delete', index=loop.index0) }}" method="post" style="display:inline;">
-          <button type="submit">Delete</button>
-      </form>
-
-      </li>
-
-      {% endfor %}
-    </ul>
+            if
+            todo['done']
+            %}
+            checked
+            {%endif%}
+            disabled
+            onchange="this.form.submit()"
+            />
+            <span {%if todo['done'] %} style="text-decoration:line-through" {% endif %}>{{ todo['task'] }}</span>
+            <form action="{{url_for('check', index=loop.index0)}}" method="post" style="display:inline;">
+              <button type="submit">Check</button>
+            </form>
+            <form action="{{ url_for('edit', index=loop.index0) }}" method="get" style="display:inline;">
+              <button type="submit" class="edit">Edit</button>
+            </form>
+            <form action="{{ url_for('delete', index=loop.index0) }}" method="post" style="display:inline;">
+              <button type="submit" class="delete">Delete</button>
+            </form>
+            
+          </li>
+          
+          {% endfor %}
+        </ul>
     <form action="{{ url_for('add') }}" method="post">
       <input type="text" name="todo" />
       <button type="submit">Add Todo</button>
     </form>
+    
 
-
+  </div>
   </body>
-</html>
+  </html>
+  

@@ -1,6 +1,5 @@
 from flask import Flask, render_template, redirect, request, url_for
 
-#TODO: add css to style web
 
 app = Flask(__name__, template_folder="templates")
 
